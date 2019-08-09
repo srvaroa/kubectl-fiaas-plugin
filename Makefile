@@ -20,10 +20,10 @@ clean:
 release:
 	mkdir -p $(RELEASE_DIR)
 	for O in $(OBJS) ; do \
-		GOOS=linux GOARCH=amd64 go build -o $(RELEASE_DIR)/$(PREFIX)$$O-$(VERSION)-linux-amd64 cmd/$$O/*; \
-		GOOS=darwin GOARCH=amd64 go build -o $(RELEASE_DIR)/$(PREFIX)$$O-$(VERSION)-darwin-amd64 cmd/$$O/*; \
-		GOOS=windows GOARCH=amd64 go build -o $(RELEASE_DIR)/$(PREFIX)$$O-$(VERSION)-windows-amd64.exe cmd/$$O/*; \
+		GO111MODULE=on GOOS=linux GOARCH=amd64 go build -o $(RELEASE_DIR)/$(PREFIX)$$O-$(VERSION)-linux-amd64 cmd/$$O/*; \
+		GO111MODULE=on GOOS=darwin GOARCH=amd64 go build -o $(RELEASE_DIR)/$(PREFIX)$$O-$(VERSION)-darwin-amd64 cmd/$$O/*; \
+		GO111MODULE=on GOOS=windows GOARCH=amd64 go build -o $(RELEASE_DIR)/$(PREFIX)$$O-$(VERSION)-windows-amd64.exe cmd/$$O/*; \
 	done
 
 %:
-	go build -o $(BIN_DIR)/$(PREFIX)$@ cmd/$@/*
+	GO111MODULE=on go build -o $(BIN_DIR)/$(PREFIX)$@ cmd/$@/*
